@@ -42,7 +42,10 @@ def retweet():
 while True:
 	try:
 		retweet()
-		time.sleep(30)
-	except:
-		print('some error with the tweet, would retry again')
+		time.sleep(120)
+	except tweepy.RateLimitError:
+		print("You have reached the twitter rate limit, kindly wait for sometime -don't worry my timer has started already and I'd restart automatically")
+		time.sleep(60*60*3)
+	except tweepy.TweepError:
+		print('you have retweeted this before, please wait while I pass')
 		time.sleep(30)
