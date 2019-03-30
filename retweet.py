@@ -36,8 +36,9 @@ def retweet():
         print(str(status.id)+status.text)
         last_seen_id = status.id
         store_last_seen_id(last_seen_id, FILE_NAME)
-        print('found tweets')
-        api.retweet(status.id)
+	if '#follow back' in mention.full_text.lower():
+        	print('found tweets')
+        	api.retweet(status.id)
 
 while True:
 	try:
