@@ -11,7 +11,8 @@ auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
 FILE_NAME = 'last_seen_id.txt'
-#You need to create an empty text file and name last_seen_id.txt This script will read the tweet id and keep updating it when done to avoid repeating a tweet
+#You need to create an empty text file and name last_seen_id.txt
+#This script will read the tweet id and keep updating it when done to avoid repeating a tweet
 
 def retrieve_last_seen_id(file_name):
     f_read = open(file_name, 'r')
@@ -27,9 +28,9 @@ def store_last_seen_id(last_seen_id, file_name):
 
 def retweet():
     print('retrieving and attempting to retweet...')
- 
+
     last_seen_id = retrieve_last_seen_id(FILE_NAME)
-    
+
     home = api.home_timeline(
                         last_seen_id,)
     for status in reversed(home):
