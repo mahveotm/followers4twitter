@@ -1,10 +1,12 @@
+import os
 import tweepy, time
-# this script enables you to retweet your timeline feeds. Several error including attempts to retweet already retweeted tweets are taken into account
 
-CONSUMER_KEY ='your consumer key goes here'
-CONSUMER_SECRET ='your consumer secret goes here'
-ACCESS_KEY ='your access key goes here'
-ACCESS_SECRET = 'your access secret goes here'
+# this script enables you to retweet your timeline feeds. Several error including attempts to retweet already retweeted tweets are taken into account
+#new update include saving your consumer keys and other secret tokens to env before running. 
+CONSUMER_KEY = os.environ.get('CONSUMER_KEY')
+CONSUMER_SECRET =os.environ.get('CONSUMER_SECRET')
+ACCESS_KEY =os.environ.get('ACCESS_KEY')
+ACCESS_SECRET = os.environ.get('ACCESS_SECRET')
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
@@ -37,7 +39,7 @@ def retweet():
         print(str(status.id)+status.text)
         last_seen_id = status.id
         store_last_seen_id(last_seen_id, FILE_NAME)
-	if 'follow' in status.text.lower():
+    if 'follow' in status.text.lower():
         	print('found tweets')
         	api.retweet(status.id)
 
